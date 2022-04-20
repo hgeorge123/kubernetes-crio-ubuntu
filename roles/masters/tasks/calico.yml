@@ -1,0 +1,13 @@
+- name: Put calico template
+  template:
+    src: calico.yaml.j2
+    dest: /tmp/calico.yml
+    owner: root
+    group: root
+    mode: "0777"
+
+- name: Setup calico
+  shell: kubectl -n kube-system apply -f /tmp/calico.yml >> calico-apply.log
+  args: 
+    chdir: $HOME
+    creates: calico-apply.log

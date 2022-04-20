@@ -1,0 +1,38 @@
+- name: Update apt and install haproxy 
+  apt:
+    update_cache=yes
+    name=haproxy
+    state=latest
+
+- name: Enable service haproxy and ensure it is not masked
+  ansible.builtin.systemd:
+    name: haproxy
+    enabled: yes
+    masked: no
+
+- name: Systemctl start haproxy
+  systemd:
+    name: haproxy
+    state: started
+    enabled: true
+
+- name: " configure haproxy.cfg file"
+  become: yes
+  ansible.builtin.copy:
+    src: "/root/ansible/kubernetes-cluster-ubuntu/roles/lb/templates/haproxy.cfg.j2"
+    dest: "/etc/haproxy/haproxy.cfg"
+    owner: root
+    group: root
+    #mode: '0644'
+    backup: yes
+
+- name: " haproxy service start"
+  systemd:
+    name: haproxy
+    state: stopped
+
+- name: Systemctl start haproxy
+  systemd:
+    name: haproxy
+    state: started
+    enabled: true

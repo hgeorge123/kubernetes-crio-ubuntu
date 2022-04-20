@@ -1,0 +1,4 @@
+- include_tasks: "setup.yml"
+- include_tasks: "calico.yml"
+- include_tasks: "token.yml"
+- include_tasks: "nginx-ingress-yml"

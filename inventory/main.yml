@@ -1,0 +1,29 @@
+all:
+  vars:
+    OS: "xUbuntu_20.04"
+    VERSION: "1.23"
+  children:
+    kubernetes:
+      children: 
+        masters:
+          hosts:
+                  #master-01.aon360sdm.local:
+        other_masters:
+          hosts:
+                  #master-02.aon360sdm.local:
+                    #master-03.aon360sdm.local:
+        nodes:
+          hosts:
+                  #worker-01.aon360sdm.local:
+                    #worker-02.aon360sdm.local:
+                    #worker-03.aon360sdm.local:
+    loadbalancer:
+      children:
+        lb:
+          hosts:
+                  #lb.aon360sdm.local:
+    nfsserver:
+      children:
+        nfs:
+          hosts:
+            nfs-sdm.aon360sdm.local:

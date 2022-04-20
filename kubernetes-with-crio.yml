@@ -1,0 +1,52 @@
+
+- hosts: nfs
+  gather_facts: true
+  remote_user: ubuntu_sdm
+  become: yes
+  become_user: root
+  roles:
+    - { role: nfs }
+
+- hosts: lb
+  gather_facts: true
+  remote_user: ubuntu_sdm
+  become: yes
+  become_user: root
+  roles:
+    - { role: lb }
+
+- hosts: kubernetes
+  gather_facts: true
+  remote_user: ubuntu_sdm
+  become: yes
+  become_user: root
+  roles:
+    - { role: commons }
+    - { role: cri-o }
+    - { role: kubernetes }
+
+
+- hosts: masters
+  gather_facts: true
+  remote_user: ubuntu_sdm
+  become: yes
+  become_user: root
+  roles:
+    - { role: masters }
+
+- hosts: other_masters
+  gather_facts: true
+  remote_user: ubuntu_sdm
+  become: yes
+  become_user: root
+  roles:
+    - { role: other_masters }
+
+- hosts: nodes
+  gather_facts: true
+  remote_user: ubuntu_sdm
+  become: yes
+  become_user: root
+  roles:
+    - { role: nodes }
+
